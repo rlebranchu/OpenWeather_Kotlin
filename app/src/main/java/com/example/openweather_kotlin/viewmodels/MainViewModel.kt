@@ -2,6 +2,7 @@ package com.example.openweather_kotlin.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.openweather_kotlin.models.WeatherForecastModel
 import com.example.openweather_kotlin.models.WeatherModel
 import com.example.openweather_kotlin.services.WeatherAPIService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -19,6 +20,7 @@ class MainViewModel: ViewModel() {
 
     // Declaration of "State" of weather
     val weather_data = MutableLiveData<WeatherModel>()
+    val weather_forecast_data = MutableLiveData<WeatherForecastModel>()
     val weather_error = MutableLiveData<Boolean>()
     val weather_loading = MutableLiveData<Boolean>()
 
@@ -48,9 +50,31 @@ class MainViewModel: ViewModel() {
                         //Stop loading status
                         weather_loading.value = false
                     }
+                })
+        )
+        disposable.add(
+            WeatherAPIService.getWeatherForecastData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                // Manage the return of data of getDataService call
+                .subscribeWith(object: DisposableSingleObserver<WeatherForecastModel>(){
+                    override fun onSuccess(value: WeatherForecastModel) {
+                        weather_forecast_data.value = value
+                        // Inform of a good response
+                        weather_error.value = false
+                        // Stop loading status
+                        weather_loading.value = false
+                    }
 
+                    override fun onError(e: Throwable) {
+                        // Inform of a bad response
+                        weather_error.value = true
+                        // Stop loading status
+                        weather_loading.value = false
+                    }
                 })
         )
     }
+
 
 }

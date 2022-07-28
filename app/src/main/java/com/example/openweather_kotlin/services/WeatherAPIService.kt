@@ -1,5 +1,6 @@
 package com.example.openweather_kotlin.services
 
+import com.example.openweather_kotlin.models.WeatherForecastModel
 import com.example.openweather_kotlin.models.WeatherModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
@@ -24,5 +25,10 @@ object WeatherAPIService {
     fun getDataService(): Single<WeatherModel> {
         // Get Data of default City
         return api.getWeatherData()
+    }
+
+    fun getWeatherForecastData() : Single<WeatherForecastModel> {
+        // Get Data of 5 day weather forecast
+        return api.getWeatherForecastData()
     }
 }

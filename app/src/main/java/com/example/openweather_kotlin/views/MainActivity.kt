@@ -3,17 +3,25 @@ package com.example.openweather_kotlin.views
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.ListView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
+import com.example.openweather_kotlin.utils.ViewUtils
 import com.example.openweather_kotlin.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel: MainViewModel
     private lateinit var CACHE_GETTER: SharedPreferences
     private lateinit var CACHE_SETTER: SharedPreferences.Editor
+
+    private lateinit var weatherForecastRecycleView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,41 +54,21 @@ class MainActivity : AppCompatActivity() {
                 // Set Temperature label
                 temperature.text = weatherData.main.temp.toString() + " °C"
                 // Set Weather Icon
-                setWeatherIconToImageView(weatherIcon,weatherData.weather[0].icon)
+                ViewUtils.setWeatherIconToImageView(weatherIcon, weatherData.weather[0].icon)
+            }
+        }
+
+        viewModel.weather_forecast_data.observe(this) { weather_forecast_data ->
+            weatherForecastRecycleView = findViewById<View>(R.id.weatherForecastRecycleView) as RecyclerView
+            weatherForecastRecycleView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            weatherForecastRecycleView.adapter = WeatherForecastAdapter(weather_forecast_data.list)
+            {
+                Toast.makeText(this,"You have selected the weather of the day : ${it.dtTxt}",Toast.LENGTH_SHORT).show()
             }
         }
 
         // TODO : viewModel for weather_load : to show loading
 
         // TODO : viewModel for weather_error : to show error
-    }
-
-    private fun setWeatherIconToImageView(imageView: ImageView, icon: String) {
-        if(icon == "01d")
-            imageView.setImageResource(R.drawable.wicon01d)
-        else if(icon == "01n")
-            imageView.setImageResource(R.drawable.wicon01n)
-        else if(icon == "02d")
-            imageView.setImageResource(R.drawable.wicon02d)
-        else if(icon == "02n")
-            imageView.setImageResource(R.drawable.wicon02n)
-        else if(icon.startsWith("03"))
-            imageView.setImageResource(R.drawable.wicon03)
-        else if(icon.startsWith("04"))
-            imageView.setImageResource(R.drawable.wicon04)
-        else if(icon.startsWith("09"))
-            imageView.setImageResource(R.drawable.wicon09)
-        else if(icon == "10d")
-            imageView.setImageResource(R.drawable.wicon10d)
-        else if(icon == "10n")
-            imageView.setImageResource(R.drawable.wicon10n)
-        else if(icon.startsWith("11"))
-            imageView.setImageResource(R.drawable.wicon11)
-        else if(icon.startsWith("13"))
-            imageView.setImageResource(R.drawable.wicon13)
-        else if(icon.startsWith("50"))
-            imageView.setImageResource(R.drawable.wicon50)
-        else
-            imageView.setImageResource(R.drawable.wiconerror)
     }
 }

@@ -71,123 +71,15 @@
             app:layout_constraintStart_toStartOf="@+id/cityName"
             app:layout_constraintTop_toTopOf="@+id/cityName" />
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
-            android:layout_width="328dp"
-            android:layout_height="149dp"
-            app:layout_constraintEnd_toEndOf="@+id/cityName"
-            app:layout_constraintHorizontal_bias="0.521"
-            app:layout_constraintStart_toStartOf="@+id/nextWeekLabel"
-            app:layout_constraintTop_toBottomOf="@+id/nextWeekLabel">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_margin="5dp"
-                    app:cardBackgroundColor="@color/transparent"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="8dp"
-                    app:strokeColor="@color/light_grey"
-                    app:strokeWidth="3dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:text="Vendredi"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="15sp" />
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="12dp"
-                            android:contentDescription="Weather Logo"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_margin="5dp"
-                    app:cardBackgroundColor="@color/transparent"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="8dp"
-                    app:strokeColor="@color/light_grey"
-                    app:strokeWidth="3dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Samedi"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="15sp" />
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="12dp"
-                            android:contentDescription="Weather Logo"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_margin="5dp"
-                    app:cardBackgroundColor="@color/transparent"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="8dp"
-                    app:strokeColor="@color/light_grey"
-                    app:strokeWidth="3dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Dimanche"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="15sp" />
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="12dp"
-                            android:contentDescription="Weather Logo"
-                            app:srcCompat="@android:drawable/ic_menu_gallery" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-        </HorizontalScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weatherForecastRecycleView"
+            android:layout_width="339dp"
+            android:layout_height="152dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nextWeekLabel" />
 
         <TextView
             android:id="@+id/nextWeekLabel"
@@ -195,7 +87,7 @@
             android:layout_height="37dp"
             android:layout_marginBottom="160dp"
             android:gravity="center_horizontal"
-            android:text="NEXT WEEK"
+            android:text="NEXT DAYS"
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
