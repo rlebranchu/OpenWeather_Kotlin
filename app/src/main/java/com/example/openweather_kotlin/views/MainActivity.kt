@@ -4,14 +4,14 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.ListView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
+import com.example.openweather_kotlin.models.WeatherForecastItem
 import com.example.openweather_kotlin.utils.ViewUtils
+import com.example.openweather_kotlin.utils.utils_conversion
 import com.example.openweather_kotlin.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // Get cityName of cache
-        var cityNameCache = CACHE_GETTER.getString("cityName", "Angers")
+        val cityNameCache = CACHE_GETTER.getString("cityName", "Angers")
         cityName.text = cityNameCache
 
         // Now, we have the city showed, we could call api to get its weather
@@ -59,12 +59,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.weather_forecast_data.observe(this) { weather_forecast_data ->
+            // Filter to take only the weather at 3PM for each day
+            val weatherDays = weather_forecast_data.list.filter {
+                // "k" DateTimeFormat : clock-hour-of-day (01-24)
+                utils_conversion.stringDateFormatter(it.dtTxt,"yyyy-MM-dd HH:mm:ss","k") == "15"
+            } as ArrayList<WeatherForecastItem>
             weatherForecastRecycleView = findViewById<View>(R.id.weatherForecastRecycleView) as RecyclerView
             weatherForecastRecycleView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            weatherForecastRecycleView.adapter = WeatherForecastAdapter(weather_forecast_data.list)
+            // Define adapter to RecycleView for Weather forecast days
+            weatherForecastRecycleView.adapter = WeatherForecastAdapter(weatherDays)
             {
                 Toast.makeText(this,"You have selected the weather of the day : ${it.dtTxt}",Toast.LENGTH_SHORT).show()
             }
+
         }
 
         // TODO : viewModel for weather_load : to show loading

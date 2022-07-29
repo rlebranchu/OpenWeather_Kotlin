@@ -1,28 +1,22 @@
 package com.example.openweather_kotlin.views
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
-import com.example.openweather_kotlin.models.WeatherForecastDay
+import com.example.openweather_kotlin.models.WeatherForecastItem
 import com.example.openweather_kotlin.utils.ViewUtils
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import com.example.openweather_kotlin.utils.utils_conversion
 import kotlinx.android.synthetic.main.weather_listview_item.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class WeatherForecastAdapter(val weatherList : ArrayList<WeatherForecastDay>,val listener: (WeatherForecastDay) -> Unit) : RecyclerView.Adapter<WeatherForecastAdapter.ViewHolder>() {
+class WeatherForecastAdapter(val weatherList : List<WeatherForecastItem>,val listener: (WeatherForecastItem) -> Unit) : RecyclerView.Adapter<WeatherForecastAdapter.ViewHolder>() {
 
     // This method will create and display each element from our WeatherForecastDay model there, returning the "ViewHolder" class.
-    // This class will convert our wetaher day data into elements of our recycleView.
+    // This class will convert our weather day data into elements of our recycleView.
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val listView = LayoutInflater.from(parent.context).inflate(R.layout.weather_listview_item,parent, false)
         return ViewHolder(listView)
@@ -40,13 +34,10 @@ class WeatherForecastAdapter(val weatherList : ArrayList<WeatherForecastDay>,val
 
     class ViewHolder(val weatherItem : View) : RecyclerView.ViewHolder(weatherItem)
     {
-        fun bind(weather: WeatherForecastDay, listener: (WeatherForecastDay) -> Unit) = with(itemView)
+        fun bind(weather: WeatherForecastItem, listener: (WeatherForecastItem) -> Unit) = with(itemView)
         {
             // Format Date of day in dd/MM Format
-            var dateBeforeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            var dateTargetFormatter = DateTimeFormatter.ofPattern("dd/MM")
-            var formattedDate = LocalDate.parse(weather.dtTxt,dateBeforeFormat).format(dateTargetFormatter)
-            itemView.dayName.text = formattedDate
+            itemView.dayName.text = utils_conversion.stringDateFormatter(weather.dtTxt, "yyyy-MM-dd HH:mm:ss","dd/MM")
             ViewUtils.setWeatherIconToImageView(itemView.dayWeatherIcon,weather.weather[0].icon)
 
             // Define the action launched at each click on item

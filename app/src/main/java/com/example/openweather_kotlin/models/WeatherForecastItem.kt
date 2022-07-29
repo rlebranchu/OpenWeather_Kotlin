@@ -3,7 +3,7 @@ package com.example.openweather_kotlin.models
 
 import com.google.gson.annotations.SerializedName
 
-data class WeatherForecastDay(
+data class WeatherForecastItem (
     @SerializedName("clouds")
     val clouds: Clouds,
     @SerializedName("dt")
@@ -13,13 +13,15 @@ data class WeatherForecastDay(
     @SerializedName("main")
     val main: Main,
     @SerializedName("pop")
-    val pop: Int,
+    val pop: Double,
+    @SerializedName("rain")
+    val rain: Rain,
     @SerializedName("sys")
-    val sys: SysForecastDay,
+    val sys: SysForecast,
     @SerializedName("visibility")
     val visibility: Int,
     @SerializedName("weather")
     val weather: List<Weather>,
     @SerializedName("wind")
-    val wind: WindForecastDay
+    val wind: Wind
 )
