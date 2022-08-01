@@ -22,13 +22,13 @@ object WeatherAPIService {
         .build()
         .create(WeatherAPI::class.java)
 
-    fun getDataService(): Single<WeatherModel> {
+    fun getDataService(city: String): Single<WeatherModel> {
         // Get Data of default City
-        return api.getWeatherData()
+        return api.getWeatherData(city)
     }
 
-    fun getWeatherForecastData() : Single<WeatherForecastModel> {
+    fun getWeatherForecastData(city: String) : Single<WeatherForecastModel> {
         // Get Data of 5 day weather forecast
-        return api.getWeatherForecastData()
+        return api.getWeatherForecastData(city)
     }
 }

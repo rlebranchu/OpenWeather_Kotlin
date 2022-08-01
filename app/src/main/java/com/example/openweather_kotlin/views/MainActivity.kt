@@ -3,6 +3,8 @@ package com.example.openweather_kotlin.views
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -36,12 +38,26 @@ class MainActivity : AppCompatActivity() {
         // Initialization of viewModel
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        // Set function of the EditText of city search
+        searchCity.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                viewModel.fetchWeatherData(s.toString())
+            }
+        })
+
         // Get cityName of cache
         val cityNameCache = CACHE_GETTER.getString("cityName", "Angers")
         cityName.text = cityNameCache
 
         // Now, we have the city showed, we could call api to get its weather
-        viewModel.fetchWeatherData()
+        viewModel.fetchWeatherData(cityNameCache ?: "Angers")
 
         // Listener to detect all modification of weather data modification in view model
         trackWeatherModification()
@@ -51,6 +67,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.weather_data.observe(this) { weatherData ->
             weatherData.let {
                 // To refresh all widgets in home page
+                // Set CityName Label
+                cityName.text = weatherData.name
                 // Set Temperature label
                 temperature.text = weatherData.main.temp.toString() + " °C"
                 // Set Weather Icon

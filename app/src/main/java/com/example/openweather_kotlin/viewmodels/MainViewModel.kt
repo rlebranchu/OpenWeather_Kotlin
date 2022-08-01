@@ -24,14 +24,14 @@ class MainViewModel: ViewModel() {
     val weather_error = MutableLiveData<Boolean>()
     val weather_loading = MutableLiveData<Boolean>()
 
-    fun fetchWeatherData() {
-        getDataFromAPI()
+    fun fetchWeatherData(city: String) {
+        getDataFromAPI(city)
     }
 
-    private fun getDataFromAPI() {
+    private fun getDataFromAPI(city : String) {
         weather_loading.value = true
         disposable.add(
-            WeatherAPIService.getDataService()
+            WeatherAPIService.getDataService(city)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 // Manage the return of data of getDataService call
@@ -53,7 +53,7 @@ class MainViewModel: ViewModel() {
                 })
         )
         disposable.add(
-            WeatherAPIService.getWeatherForecastData()
+            WeatherAPIService.getWeatherForecastData(city)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 // Manage the return of data of getDataService call
@@ -75,6 +75,8 @@ class MainViewModel: ViewModel() {
                 })
         )
     }
+
+
 
 
 }
