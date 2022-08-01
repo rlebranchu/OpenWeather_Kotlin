@@ -19,17 +19,17 @@ class MainViewModel: ViewModel() {
     private val disposable = CompositeDisposable()
 
     // Declaration of "State" of weather
-    val weather_data = MutableLiveData<WeatherModel>()
-    val weather_forecast_data = MutableLiveData<WeatherForecastModel>()
-    val weather_error = MutableLiveData<Boolean>()
-    val weather_loading = MutableLiveData<Boolean>()
+    val weatherData = MutableLiveData<WeatherModel>()
+    val weatherForecastData = MutableLiveData<WeatherForecastModel>()
+    val weatherError = MutableLiveData<Boolean>()
+    val weatherLoading = MutableLiveData<Boolean>()
 
     fun fetchWeatherData(city: String) {
         getDataFromAPI(city)
     }
 
     private fun getDataFromAPI(city : String) {
-        weather_loading.value = true
+        weatherLoading.value = true
         disposable.add(
             WeatherAPIService.getDataService(city)
                 .subscribeOn(Schedulers.io())
@@ -37,18 +37,18 @@ class MainViewModel: ViewModel() {
                 // Manage the return of data of getDataService call
                 .subscribeWith(object: DisposableSingleObserver<WeatherModel>(){
                     override fun onSuccess(value: WeatherModel) {
-                        weather_data.value = value
+                        weatherData.value = value
                         // Inform of a good response
-                        weather_error.value = false
+                        weatherError.value = false
                         //Stop loading status
-                        weather_loading.value = false
+                        weatherLoading.value = false
                     }
 
                     override fun onError(e: Throwable) {
                         // Inform of a bad response
-                        weather_error.value = true
+                        weatherError.value = true
                         //Stop loading status
-                        weather_loading.value = false
+                        weatherLoading.value = false
                     }
                 })
         )
@@ -59,18 +59,18 @@ class MainViewModel: ViewModel() {
                 // Manage the return of data of getDataService call
                 .subscribeWith(object: DisposableSingleObserver<WeatherForecastModel>(){
                     override fun onSuccess(value: WeatherForecastModel) {
-                        weather_forecast_data.value = value
+                        weatherForecastData.value = value
                         // Inform of a good response
-                        weather_error.value = false
+                        weatherError.value = false
                         // Stop loading status
-                        weather_loading.value = false
+                        weatherLoading.value = false
                     }
 
                     override fun onError(e: Throwable) {
                         // Inform of a bad response
-                        weather_error.value = true
+                        weatherError.value = true
                         // Stop loading status
-                        weather_loading.value = false
+                        weatherLoading.value = false
                     }
                 })
         )

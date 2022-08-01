@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun trackWeatherModification() {
-        viewModel.weather_data.observe(this) { weatherData ->
+        viewModel.weatherData.observe(this) { weatherData ->
             weatherData.let {
                 // To refresh all widgets in home page
                 // Set CityName Label
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.weather_forecast_data.observe(this) { weather_forecast_data ->
+        viewModel.weatherForecastData.observe(this) { weather_forecast_data ->
             // Filter to take only the weather at 3PM for each day
             val weatherDays = weather_forecast_data.list.filter {
                 // "k" DateTimeFormat : clock-hour-of-day (01-24)
