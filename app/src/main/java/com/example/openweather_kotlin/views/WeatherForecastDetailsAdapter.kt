@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
 import com.example.openweather_kotlin.models.WeatherForecastItem
 import com.example.openweather_kotlin.utils.ViewUtils
-import com.example.openweather_kotlin.utils.utils_conversion
+import com.example.openweather_kotlin.utils.stringDateFormatter
 import kotlinx.android.synthetic.main.weather_listview_details_item.view.*
 import kotlinx.android.synthetic.main.weather_listview_item.view.*
 import kotlinx.android.synthetic.main.weather_listview_item.view.dayName
@@ -40,7 +40,7 @@ class WeatherForecastDetailsAdapter(val weatherList : List<WeatherForecastItem>,
         fun bind(weather: WeatherForecastItem, listener: (WeatherForecastItem) -> Unit) = with(itemView)
         {
             // Format Date of day in dd/MM Format
-            itemView.dayName.text = utils_conversion.stringDateFormatter(weather.dtTxt, "yyyy-MM-dd HH:mm:ss","dd/MM - HH:mm")
+            itemView.dayName.text = stringDateFormatter(weather.dtTxt, "yyyy-MM-dd HH:mm:ss","dd/MM - HH:mm")
 
             // Set temperature Label
             itemView.temperature.text = weather.main.feelsLike.toString() + " °C"

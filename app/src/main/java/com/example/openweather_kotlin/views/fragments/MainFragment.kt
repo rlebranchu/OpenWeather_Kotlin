@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
 import com.example.openweather_kotlin.models.WeatherForecastItem
 import com.example.openweather_kotlin.utils.ViewUtils
-import com.example.openweather_kotlin.utils.utils_conversion
+import com.example.openweather_kotlin.utils.stringDateFormatter
 import com.example.openweather_kotlin.viewmodels.MainViewModel
 import com.example.openweather_kotlin.views.WeatherForecastAdapter
 
@@ -86,7 +86,7 @@ class MainFragment : Fragment() {
             // Filter to take only the weather at 3PM for each day
             val weatherDays = weather_forecast_data.list.filter {
                 // "k" DateTimeFormat : clock-hour-of-day (01-24)
-                utils_conversion.stringDateFormatter(it.dtTxt,"yyyy-MM-dd HH:mm:ss","k") == "15"
+                stringDateFormatter(it.dtTxt,"yyyy-MM-dd HH:mm:ss","k") == "15"
             } as ArrayList<WeatherForecastItem>
             val weatherForecastRV = view.findViewById<RecyclerView>(R.id.weatherForecastRecycleView)
             weatherForecastRV.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

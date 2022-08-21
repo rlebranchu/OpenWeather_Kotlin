@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
 import com.example.openweather_kotlin.models.WeatherForecastItem
 import com.example.openweather_kotlin.utils.ViewUtils
-import com.example.openweather_kotlin.utils.utils_conversion
+import com.example.openweather_kotlin.utils.stringDateFormatter
 import kotlinx.android.synthetic.main.weather_listview_item.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -37,7 +37,7 @@ class WeatherForecastAdapter(val weatherList : List<WeatherForecastItem>,val lis
         fun bind(weather: WeatherForecastItem, listener: (WeatherForecastItem) -> Unit) = with(itemView)
         {
             // Format Date of day in dd/MM Format
-            itemView.dayName.text = utils_conversion.stringDateFormatter(weather.dtTxt, "yyyy-MM-dd HH:mm:ss","dd/MM")
+            itemView.dayName.text = stringDateFormatter(weather.dtTxt, "yyyy-MM-dd HH:mm:ss","dd/MM")
             ViewUtils.setWeatherIconToImageView(itemView.dayWeatherIcon,weather.weather[0].icon)
 
             // Define the action launched at each click on item

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="views.fragments.ErrorFragment">
+
+    <ImageView
+        android:id="@+id/errorIcon"
+        android:layout_width="201dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="172dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/error_icon" />
+
+    <TextView
+        android:id="@+id/errorTitle"
+        android:layout_width="282dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:autoSizeMaxTextSize="50sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/errorTitle"
+        android:textAlignment="center"
+        android:textColor="@color/dark_blue"
+        android:textFontWeight="700"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/errorIcon"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/errorIcon"
+        app:layout_constraintTop_toBottomOf="@+id/errorIcon" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="294dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:autoSizeMaxTextSize="50sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/errorMessage"
+        android:textAlignment="center"
+        android:textColor="@color/light_grey"
+        android:textFontWeight="700"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/errorTitle"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="@+id/errorTitle"
+        app:layout_constraintTop_toBottomOf="@+id/errorTitle" />
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="186dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/button_background"
+        android:text="@string/tryAgain"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/errorMessage"
+        app:layout_constraintVertical_bias="0.08" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

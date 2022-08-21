@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,10 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openweather_kotlin.R
 import com.example.openweather_kotlin.models.WeatherForecastItem
-import com.example.openweather_kotlin.utils.ViewUtils
-import com.example.openweather_kotlin.utils.utils_conversion
 import com.example.openweather_kotlin.viewmodels.MainViewModel
-import com.example.openweather_kotlin.views.WeatherForecastAdapter
 import com.example.openweather_kotlin.views.WeatherForecastDetailsAdapter
 
 class DetailsFragment : Fragment() {
@@ -34,7 +28,7 @@ class DetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_details, container, false)
 
-        val homeBtn = view.findViewById<Button>(R.id.homeBtn)
+        val homeBtn = view.findViewById<ImageButton>(R.id.homeBtn)
         homeBtn.setOnClickListener{
             findNavController().navigate(R.id.action_detailsFragment_to_mainFragment)
         }

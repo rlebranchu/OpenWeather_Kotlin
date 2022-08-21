@@ -9,13 +9,12 @@
     android:id="@+id/detailsView"
     tools:context=".views.fragments.DetailsFragment">
 
-    <Button
+    <ImageButton
         android:id="@+id/homeBtn"
-        android:layout_width="64dp"
-        android:layout_height="62dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_background"
-        android:drawableLeft="@drawable/home_icon"
-        android:text=""
+        android:src="@drawable/home_icon"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@+id/titleDetails"
         app:layout_constraintEnd_toStartOf="@+id/titleDetails"
