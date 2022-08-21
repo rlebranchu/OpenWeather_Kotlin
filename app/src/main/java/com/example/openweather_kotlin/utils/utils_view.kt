@@ -1,9 +1,28 @@
 package com.example.openweather_kotlin.utils
 
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import com.example.openweather_kotlin.R
 
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
+}
+
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
 object ViewUtils {
+
     fun setWeatherIconToImageView(imageView: ImageView, icon: String) {
         if(icon == "01d")
             imageView.setImageResource(R.drawable.wicon01d)

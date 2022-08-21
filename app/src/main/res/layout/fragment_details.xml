@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/detailsView"
+    tools:context=".views.fragments.DetailsFragment">
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="64dp"
+        android:layout_height="62dp"
+        android:background="@drawable/button_background"
+        android:drawableLeft="@drawable/home_icon"
+        android:text=""
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/titleDetails"
+        app:layout_constraintEnd_toStartOf="@+id/titleDetails"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/weatherForecastDetailsRecycleView"
+        app:layout_constraintTop_toTopOf="@+id/titleDetails"
+        app:layout_constraintVertical_bias="0.571" />
+
+    <TextView
+        android:id="@+id/titleDetails"
+        android:layout_width="228dp"
+        android:layout_height="37dp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/titleDetails"
+        android:textAlignment="center"
+        android:textColor="@color/dark_blue"
+        android:textFontWeight="700"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weatherForecastDetailsRecycleView"
+
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weatherForecastDetailsRecycleView"
+        android:layout_width="312dp"
+        android:layout_height="592dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDetails"
+        app:layout_constraintVertical_bias="0.584" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

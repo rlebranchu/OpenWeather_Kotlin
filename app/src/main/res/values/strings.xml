@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">OpenWeather_Kotlin</string>
+    <string name="defaultCityName">Angers</string>
+    <string name="defaultTemperature">26 °C</string>
+    <string name="placeholderSearchCity">Search your city weather</string>
+    <string name="titleNextDays">NEXT DAYS</string>
+    <string name="moreDetails">More Details</string>
+    <string name="titleDetails">Details of Weather</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="defaultDay">Dimanche</string>
 </resources>
